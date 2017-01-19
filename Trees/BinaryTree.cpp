@@ -1,5 +1,7 @@
 #include "BinaryTree.h"
 #include <iostream>
+#include <algorithm>
+#include <queue>
 
 template<class Data>
 BinaryTree<Data>::BinaryTree() {
@@ -34,6 +36,67 @@ typename BinaryTree<Data>::Node* BinaryTree<Data>::performInsertion(Node* &root,
 }
 
 template<class Data>
-void BinaryTree<Data>::printTree() {
-  std::cout << root->data << ", " << root->left->data << ", " << root->right->data << std::endl;
+bool BinaryTree<Data>::search(Data target) {
+  return performSearch(root, target);
 }
+
+template<class Data>
+bool BinaryTree<Data>::performSearch(Node* &root, Data target) {
+  if (root == NULL)
+    return false;
+  if (target == root->data)
+    return true;
+  else {
+    if (target < root->data) return performSearch(root->left, target);
+    else return performSearch(root->right, target);
+  }
+}
+
+template<class Data>
+Data BinaryTree<Data>::max() {
+  return findMax(root);
+}
+
+template<class Data>
+Data BinaryTree<Data>::findMax(Node* &root) {
+  Data rootValue, left, right, maxValue = -999;
+
+  if (root != NULL) {
+    rootValue = root->data;
+    left = findMax(root->left);
+    right = findMax(root->right);
+
+    return std::max(rootValue, std::max(left, right));
+  } 
+  // else
+  return Data(-9999);
+}
+
+
+// without Recursion, using Queue
+/*
+template<class Data>
+Data BinaryTree<Data>::findMax(Node* &root) {
+  Data maxValue(-10000);
+  Node *temp;
+  std::queue<Node*> maxQueue;
+
+  maxQueue.push(root);
+
+  while (!maxQueue.empty()) {
+    temp = maxQueue.front();
+    maxQueue.pop();
+    
+    if (maxValue < temp->data)
+      maxValue = temp->data;
+
+    if (temp->left != NULL)
+      maxQueue.push(temp->left);
+
+    if (temp->right != NULL)
+      maxQueue.push(temp->right);
+  }
+
+  return maxValue;
+}
+*/

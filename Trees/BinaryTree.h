@@ -7,7 +7,8 @@ class BinaryTree {
 
   BinaryTree();
   void insert(Data);
-  void printTree();
+  bool search(Data);
+  Data max();
 
   private:
   
@@ -22,6 +23,8 @@ class BinaryTree {
 
   Node* newNode(Data);
   Node* performInsertion(Node*&, Data); // pass root here
+  bool performSearch(Node*&, Data);
+  Data findMax(Node*&);
 };
 
 #endif
