@@ -2,6 +2,7 @@
 #include <iostream>
 #include <algorithm>
 #include <queue>
+#include <stack>
 
 template<class Data>
 BinaryTree<Data>::BinaryTree() {
@@ -100,3 +101,103 @@ Data BinaryTree<Data>::findMax(Node* &root) {
   return maxValue;
 }
 */
+
+template<class Data>
+int BinaryTree<Data>::size() {
+  return calculateMax(root);
+}
+
+template<class Data>
+int BinaryTree<Data>::calculateMax(Node* &root) {
+  if (root == NULL)
+    return 0;
+  else 
+    return 1 + calculateMax(root->left) + calculateMax(root->right);
+}
+
+/*
+template<class Data>
+int BinaryTree<Data>::calculateMax(Node* &root) {
+  if (root == NULL) return 0;
+  Node* temp;
+  int count = 0;
+
+  std::queue<Node*> countQueue;
+  // Always add first element!
+  countQueue.push(root);
+
+  while (!countQueue.empty()) {
+    temp = countQueue.front();
+    countQueue.pop();
+    
+    ++count;
+
+    if (temp->left != NULL) countQueue.push(temp->left);
+    if (temp->right != NULL) countQueue.push(temp->right);
+  }
+  return count;
+}
+*/
+
+template<class Data>
+void BinaryTree<Data>::printReverse() {
+  doPrintReverse(root);
+}
+
+template<class Data>
+void BinaryTree<Data>::doPrintReverse(Node* &root) {
+  if (root == NULL) return;
+  Node* temp;
+
+  std::queue<Node*> nodeQueue;
+  nodeQueue.push(root);
+
+  std::stack<Data> nodeStack;
+
+  while (!nodeQueue.empty()) {
+    temp = nodeQueue.front();
+    nodeQueue.pop();
+
+    if (temp->left != NULL) nodeQueue.push(temp->left);
+    if (temp->right != NULL) nodeQueue.push(temp->right);
+
+    nodeStack.push(temp->data);
+  }
+
+  while (!nodeStack.empty()) {
+    std::cout << nodeStack.top() << ", ";
+    nodeStack.pop();
+  }
+
+  std::cout << std::endl;
+}
+
+template<class Data>
+void BinaryTree<Data>::destroy() {
+  deleteBinaryTree(root);
+}
+
+// Deletion of Nodes should be done using POST-Order! (Destroy Children Nodes first)
+template<class Data>
+void BinaryTree<Data>::deleteBinaryTree(Node* &root) {
+  if (root == NULL) return;
+  deleteBinaryTree(root->left);
+  deleteBinaryTree(root->right);
+  std::cout << "----- deleting [Node] with data => " << root->data << std::endl;
+  delete root;
+  root = NULL;
+  return;
+}
+
+template<class Data>
+int BinaryTree<Data>::height() {
+  return getHeight(root);
+}
+
+template<class Data>
+int BinaryTree<Data>::getHeight(Node* &root) {
+  if (root == NULL)
+    return 0;
+  else
+    return 1 + std::max(getHeight(root->left), getHeight(root->right));
+}

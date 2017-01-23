@@ -9,6 +9,10 @@ class BinaryTree {
   void insert(Data);
   bool search(Data);
   Data max();
+  int size();
+  void printReverse();
+  void destroy();
+  int height();
 
   private:
   
@@ -25,6 +29,10 @@ class BinaryTree {
   Node* performInsertion(Node*&, Data); // pass root here
   bool performSearch(Node*&, Data);
   Data findMax(Node*&);
+  int calculateMax(Node*&);
+  void doPrintReverse(Node*&);
+  void deleteBinaryTree(Node*&);
+  int getHeight(Node*&);
 };
 
 #endif
