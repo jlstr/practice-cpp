@@ -201,3 +201,68 @@ int BinaryTree<Data>::getHeight(Node* &root) {
   else
     return 1 + std::max(getHeight(root->left), getHeight(root->right));
 }
+
+/*
+template<class Data>
+int BinaryTree<Data>::getHeight(Node* &root) {
+  int height = 0;
+  if (root == NULL)
+    return 0;
+
+  std::queue<Node*> nodeQueue;
+
+  nodeQueue.push(root);
+  nodeQueue.push(NULL);
+  Node *temp = NULL;
+
+  while (!nodeQueue.empty()) {
+    temp = nodeQueue.front();
+    nodeQueue.pop();
+
+    if (temp == NULL) {
+      if (!nodeQueue.empty())
+        nodeQueue.push(NULL);
+      height++;
+    } else {
+      if (temp->left != NULL)
+        nodeQueue.push(temp->left);
+      if (temp->right != NULL)
+        nodeQueue.push(temp->right);
+    }
+  } // end of while
+
+  return height;
+}
+*/
+
+template<class Data>
+Data BinaryTree<Data>::deepest() {
+  Node *deepNode = getDeepest(root);
+  if (deepNode == NULL)
+    return Data(-666);
+  else
+    return deepNode->data;
+}
+
+template<class Data>
+typename BinaryTree<Data>::Node* BinaryTree<Data>::getDeepest(Node* &root) {
+  if (root == NULL)
+    return NULL;
+
+  std::queue<Node*> nodeQueue;
+  nodeQueue.push(root);
+
+  Node *temp = NULL;
+  //
+  while (!nodeQueue.empty()) {
+    temp = nodeQueue.front();
+    nodeQueue.pop();
+
+    if (temp->left != NULL)
+      nodeQueue.push(temp->left);
+    if (temp->right != NULL)
+      nodeQueue.push(temp->right);
+  }
+
+  return temp;
+}

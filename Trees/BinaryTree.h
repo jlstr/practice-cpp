@@ -13,6 +13,7 @@ class BinaryTree {
   void printReverse();
   void destroy();
   int height();
+  Data deepest();
 
   private:
   
@@ -33,6 +34,7 @@ class BinaryTree {
   void doPrintReverse(Node*&);
   void deleteBinaryTree(Node*&);
   int getHeight(Node*&);
+  Node* getDeepest(Node*&);
 };
 
 #endif
