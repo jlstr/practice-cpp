@@ -14,6 +14,7 @@ class BinaryTree {
   void destroy();
   int height();
   Data deepest();
+  int numLeaves();
 
   private:
   
@@ -35,6 +36,7 @@ class BinaryTree {
   void deleteBinaryTree(Node*&);
   int getHeight(Node*&);
   Node* getDeepest(Node*&);
+  int getNumLeaves(Node*&);
 };
 
 #endif

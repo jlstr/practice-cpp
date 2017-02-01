@@ -7,14 +7,11 @@ int main() {
 
   BinaryTree<int> binaryTree;
 
-  binaryTree.insert(1);
-  binaryTree.insert(9);
-  binaryTree.insert(11);
+  binaryTree.insert(666);
+  binaryTree.insert(22);
+  binaryTree.insert(777);
   
-  int deepestValue = binaryTree.deepest();
-
-  if (deepestValue == -666) cout << "No deepest value found!" << endl;
-  else cout << "Deepest Value = " << deepestValue << endl;
+  cout << "Number of Leaf Nodes is: " << binaryTree.numLeaves() << endl;
 
   binaryTree.destroy();
 

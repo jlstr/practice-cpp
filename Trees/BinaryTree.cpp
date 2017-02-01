@@ -266,3 +266,36 @@ typename BinaryTree<Data>::Node* BinaryTree<Data>::getDeepest(Node* &root) {
 
   return temp;
 }
+
+template<class Data>
+int BinaryTree<Data>::numLeaves() {
+  return getNumLeaves(root);
+}
+
+template<class Data>
+int BinaryTree<Data>::getNumLeaves(Node* &root) {
+  if (root == NULL)
+    return 0;
+
+  int count = 0;
+  std::queue<Node*> treeQueue;
+  Node *temp = NULL;
+  //
+  treeQueue.push(root);
+
+  while (!treeQueue.empty()) {
+    temp = treeQueue.front();
+    treeQueue.pop();
+
+    if (temp->left == NULL && temp->right == NULL)
+      ++count;
+    else {
+      if (temp->left != NULL)
+        treeQueue.push(temp->left);
+      if (temp->right != NULL)
+        treeQueue.push(temp->right);
+    }
+  } // end of while
+
+  return count;
+}
