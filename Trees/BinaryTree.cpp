@@ -3,6 +3,7 @@
 #include <algorithm>
 #include <queue>
 #include <stack>
+#include <vector>
 
 template<class Data>
 BinaryTree<Data>::BinaryTree() {
@@ -298,4 +299,98 @@ int BinaryTree<Data>::getNumLeaves(Node* &root) {
   } // end of while
 
   return count;
+}
+
+template<class Data>
+Data BinaryTree<Data>::maxLevelSum() {
+
+  if (root == NULL)
+    return Data(0);
+  
+  int level = 0, maxLevel = 0;
+  int currentSum = 0, maxSum = 0;
+
+  std::queue<Node*> treeQueue;
+  Node *temp;
+  
+  treeQueue.push(root);
+  treeQueue.push(NULL);
+
+  while (!treeQueue.empty()) {
+    temp = treeQueue.front();
+    treeQueue.pop();
+
+    if (temp == NULL) {
+      if (currentSum > maxSum) {
+        maxSum = currentSum;
+        maxLevel = level;
+      }
+
+      currentSum = 0;
+
+      if (!treeQueue.empty()) treeQueue.push(NULL);
+
+      level++;
+    } else {
+      currentSum += temp->data;
+      if (temp->left != NULL)
+        treeQueue.push(temp->left);
+      if (temp->right != NULL)
+        treeQueue.push(temp->right);
+    }
+  } // end of while
+
+  return maxLevel;
+}
+
+template<class Data>
+void BinaryTree<Data>::printPaths() {
+  std::vector<Data> paths;
+  doPrintPaths(root, paths);
+}
+
+template<class Data>
+void BinaryTree<Data>::doPrintPaths(Node* &root, std::vector<Data> paths) {
+  if (root == NULL)
+    return;
+
+  paths.push_back(root->data);
+
+  if (root->left == NULL && root->right == NULL) {
+    std::cout << "Path: ";
+    for (typename std::vector<Data>::iterator i = paths.begin(); i != paths.end(); ++i)
+      std::cout << *i << ((std::next(i) != paths.end()) ? " - " : "");
+    std::cout << std::endl;
+  } else {
+    doPrintPaths(root->left, paths);
+    doPrintPaths(root->right, paths);
+  }
+}
+
+template<class Data>
+bool BinaryTree<Data>::hasSum(int sum) {
+  return hasSum(root, sum);
+}
+
+template<class Data>
+bool BinaryTree<Data>::hasSum(Node* &root, int sum) {
+  if (root == NULL)
+    return (sum == 0);
+  else {
+    int subSum = sum - root->data;
+    return hasSum(root->left, subSum) || hasSum(root->right, subSum);
+  }
+}
+
+template<class Data>
+int BinaryTree<Data>::sum() {
+  return sum(root);
+}
+
+template<class Data>
+int BinaryTree<Data>::sum(Node* &root) {
+  if (root == NULL)
+    return 0;
+  else
+    return root->data + sum(root->left) + sum(root->right);
 }

@@ -1,6 +1,8 @@
 #ifndef BINARY_TREE_H
 #define BINARY_TREE_H
 
+#include <vector>
+
 template<class Data>
 class BinaryTree {
   public:
@@ -15,6 +17,10 @@ class BinaryTree {
   int height();
   Data deepest();
   int numLeaves();
+  Data maxLevelSum();
+  void printPaths();
+  bool hasSum(int);
+  int sum();
 
   private:
   
@@ -37,6 +43,9 @@ class BinaryTree {
   int getHeight(Node*&);
   Node* getDeepest(Node*&);
   int getNumLeaves(Node*&);
+  void doPrintPaths(Node*&, std::vector<Data>);
+  bool hasSum(Node*&, int);
+  int sum(Node*&);
 };
 
 #endif
