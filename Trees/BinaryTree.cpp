@@ -394,3 +394,24 @@ int BinaryTree<Data>::sum(Node* &root) {
   else
     return root->data + sum(root->left) + sum(root->right);
 }
+
+template<class Data>
+void BinaryTree<Data>::ancestors(Data data) {
+  ancestors(root, data);
+}
+
+template<class Data>
+bool BinaryTree<Data>::ancestors(Node* &root, Data data) {
+  if (root == NULL)
+    return false;
+
+  if (root->data == data)
+    return true;
+
+  if (ancestors(root->left, data) || ancestors(root->right, data)) {
+    std::cout << root->data << "\t";
+    return true;
+  }
+
+  return false;
+}

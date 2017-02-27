@@ -7,9 +7,11 @@ int main() {
 
   BinaryTree<int> binaryTree;
   binaryTree.insert(1);
-  binaryTree.insert(665);
+  binaryTree.insert(4);
+  binaryTree.insert(7);
+  binaryTree.insert(666);
   
-  cout << "Tree-Sum = " << binaryTree.sum() << endl;
+  binaryTree.ancestors(666);
 
   cout << endl;
   binaryTree.destroy();

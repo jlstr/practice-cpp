@@ -21,6 +21,7 @@ class BinaryTree {
   void printPaths();
   bool hasSum(int);
   int sum();
+  void ancestors(Data);
 
   private:
   
@@ -46,6 +47,7 @@ class BinaryTree {
   void doPrintPaths(Node*&, std::vector<Data>);
   bool hasSum(Node*&, int);
   int sum(Node*&);
+  bool ancestors(Node*&, Data);
 };
 
 #endif
