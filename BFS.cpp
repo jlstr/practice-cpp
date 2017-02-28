@@ -13,7 +13,7 @@ int main() {
   graph.addEdge('A', 'B');
   graph.addEdge('B', 'C');
 
-  bfs(graph, 'A');
+  bfs(graph, 'B');
 
   return 0;
 }
