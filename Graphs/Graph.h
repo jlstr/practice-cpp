@@ -1,6 +1,7 @@
 #ifndef GRAPH_H
 #define GRAPH_H
 #include <string>
+#include <map>
 
 template<class V>
 class Graph {
@@ -19,12 +20,14 @@ class Graph {
     std::string color;
     Vertex *next;
   };
+
+  std::map<V, int> incidence;
   
   private:
   typedef struct Vertex *List;
   List *adjList;
-
   const Vertex* findVertexInList(const V&);
+  void calculateIncidence(const V&, const V&);
 
   public:
   const Vertex* getVertex(const V&);

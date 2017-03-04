@@ -5,7 +5,7 @@ template<class V>
 Graph<V>::Graph(int numVertices, bool directed) {
   this->numVertices = numVertices;
   this->directed = directed;
-  this->adjList = new List[numVertices]; // List is Vertex*
+  this->adjList = new List[numVertices+1]; // List is Vertex*
   this->position = 0;
   
   for (int i = 0; i < numVertices; ++i) this->adjList[i] = NULL;
@@ -14,7 +14,7 @@ Graph<V>::Graph(int numVertices, bool directed) {
 template<class V>
 // where u is source and v is destination
 void Graph<V>::addEdge(const V& u, const V& v) {
-  if (this->position >= this->numVertices)
+  if (this->position > this->numVertices)
     return;
 
   Vertex *vertex = const_cast<Vertex*> (findVertexInList(u));
@@ -31,6 +31,27 @@ void Graph<V>::addEdge(const V& u, const V& v) {
   // dest->next = NULL;
   dest->next = vertex->next;
   vertex->next = dest;
+
+  vertex = const_cast<Vertex*> (findVertexInList(v));
+  if (vertex == NULL) {
+    vertex = new Vertex();
+    vertex->value = v;
+    vertex->next = NULL;
+    this->adjList[this->position++] = vertex;
+  }
+
+  calculateIncidence(u, v);
+}
+
+template<class V>
+void Graph<V>::calculateIncidence(const V &u, const V &v) {
+  if (incidence[u] == 0)
+    incidence[u] = 0;
+
+  if (incidence[v] == 0)
+    incidence[v] = 1;
+  else
+    incidence[v] = ++incidence[v];
 }
 
 template<class V>
