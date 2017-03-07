@@ -22,15 +22,17 @@ class Graph {
   };
 
   std::map<V, int> incidence;
-  
-  private:
   typedef struct Vertex *List;
+
+  private:
   List *adjList;
   const Vertex* findVertexInList(const V&);
+  Vertex* newVertex(const V&);
   void calculateIncidence(const V&, const V&);
 
   public:
   const Vertex* getVertex(const V&);
+  List* getAdjacencyList();
 };
 
 #endif
