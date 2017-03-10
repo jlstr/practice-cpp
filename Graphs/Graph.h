@@ -7,7 +7,7 @@ template<class V>
 class Graph {
   public:
   Graph(int numVertices, bool directed=true);
-  void addEdge(const V&, const V&);
+  void addEdge(const V&, const V&, const int weight=1);
 
   private:
   int numVertices;
@@ -23,6 +23,7 @@ class Graph {
 
   std::map<V, int> incidence;
   typedef struct Vertex *List;
+  std::map<std::string, int> distance;
 
   private:
   List *adjList;

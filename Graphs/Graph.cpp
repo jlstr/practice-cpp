@@ -21,7 +21,7 @@ typename Graph<V>::Vertex* Graph<V>::newVertex(const V &value) {
 
 template<class V>
 // where u is source and v is destination
-void Graph<V>::addEdge(const V& u, const V& v) {
+void Graph<V>::addEdge(const V& u, const V& v, const int weight) {
   if (this->position > this->numVertices)
     return;
 
@@ -43,6 +43,10 @@ void Graph<V>::addEdge(const V& u, const V& v) {
     vertex = this->newVertex(v);
     this->adjList[this->position++] = vertex;
   }
+
+  // Add weight of edge to distance HashMap
+  char key[] = { u, '-', '>', v, '\0' };
+  this->distance[std::string(key)] = weight;
 
   calculateIncidence(u, v);
 }

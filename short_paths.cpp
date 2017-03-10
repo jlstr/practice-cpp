@@ -27,7 +27,7 @@ int main() {
     table[v->value] = std::make_pair(-1, "");
   }
 
-  shotest_paths(graph, 'D', table);
+  shotest_paths(graph, 'A', table);
   //
   // Print Results
   printTable(table);
