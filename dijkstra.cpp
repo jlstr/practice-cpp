@@ -20,7 +20,6 @@ struct Comparator {
   }
 };
 
-
 void dijkstra(Graph<char>&, char, std::map<char, std::pair<int, std::string> >&);
 void printTable(std::map<char, std::pair<int, std::string> >&);
 void updatePriority(std::priority_queue<QueueNode, vector<QueueNode>, Comparator>&, char, int);
