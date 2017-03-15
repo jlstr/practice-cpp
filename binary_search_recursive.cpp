@@ -16,7 +16,6 @@ int main() {
   return 0;
 }
 
-
 bool binarySearch(int *array, int low, int high, int E) {
   if (low > high)
     return false;
