@@ -7,7 +7,7 @@ void printArray(int*, int);
 
 int main() {
   
-  int array[] = { 4, 2 };
+  int array[] = { 10, 21, 43, 1, 66, 33, 12, 666, 40, 55, 90, 22, 40, -1 };
   const int SIZE = sizeof(array) / sizeof(int);
 
   printArray(array, SIZE);
@@ -28,8 +28,8 @@ void mergeSort(int *array, int p, int r) {
 }
 
 void merge(int *array, int p, int q, int r) {
-  int n1 = q - p + 1;  // size of sub-array 1
-  int n2 = r - q;     // size of sub-array 2
+  int n1 = q - p + 1;   // size of sub-array 1
+  int n2 = r - q;       // size of sub-array 2
 
   int *left = new int[n1 + 1]; // reserve one additional space for sentinel
   int *right = new int[n2 + 1];
