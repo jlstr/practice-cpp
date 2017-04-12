@@ -11,13 +11,13 @@ vector<int> coinChange(int*, const int, int);
 void printArray(int*, int);
 
 int main() {
-  int coins[] = { 5, 1, 10, 25, 50 }; // Coin Denominations
+  int coins[] = { 1, 25, 5, 50, 10 }; // Coin Denominations
   const int NUM_COINS = sizeof(coins) / sizeof(int);
   
   // Let's sort Coins Array to make the Algorithm work better
   std::sort(coins, coins + NUM_COINS);
 
-  int change = 26;
+  int change = 5;
   vector<int> whichCoins = coinChange(coins, NUM_COINS, change);
   cout << "Minimum number of coins to provide Change for $" << change << " is " << whichCoins.size() << endl;
   cout << "And the coins are: ";
