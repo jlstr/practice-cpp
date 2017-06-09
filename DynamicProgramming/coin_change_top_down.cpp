@@ -11,7 +11,7 @@ int main() {
   const int SIZE = sizeof(coins) / sizeof(int);
   map<int, int> memo;
 
-  int money = 21;
+  int money = 4;
   int result = minimumChange(money, coins, SIZE, memo);
 
   cout << "\nMinimum number of coins to give a change of $" << money << " is " << result << endl;
